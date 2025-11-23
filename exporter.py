@@ -217,7 +217,8 @@ def export_to_arduino_header(timeline, devices_info, project_name="animation", f
         header.append("  }")
         header.append("};")
         header.append("")
-        header.append(f"#endif // {guard_name}")
+
+    header.append(f"#endif // {guard_name}")
 
     return "\n".join(header)
 
