@@ -80,7 +80,7 @@ class App:
             self.is_saved = False
             dpg.set_viewport_title(f"Maxleda Animator - {self.project_name}*")
 
-        print(action_type, is_curve, object_id, track_name, clip_id, dragged_frame, dragged_front)
+        #print(action_type, is_curve, object_id, track_name, clip_id, dragged_frame, dragged_front)
         self.wtimeline.disable_dragging_playhead = True
         if is_curve:
             data = self.timeline.objects[object_id].tracks[track_name].keyframes
@@ -105,8 +105,8 @@ class App:
                     self.wtimeline.render()
                     break
         elif action_type == 2: # property change popup
+            self.wtimeline.set_color_for_item(object_id, track_name, clip_id, color=[255, 215, 0, 255])
             self.wtimeline.render()
-
             self.selected_object_tl = (object_id, track_name, clip_id)
             self.open_property_modal()
 
@@ -122,7 +122,7 @@ class App:
 
         for stmt in data:
             if stmt.id == clip_id:
-                print("Open property modal for:", stmt)
+                #print("Open property modal for:", stmt)
 
                 if isinstance(stmt.data, dict) and "clear_first" in stmt.data:
                     dpg.set_value("auto_clear_checkbox", stmt.data["clear_first"])
@@ -271,19 +271,17 @@ class App:
         # Populate device list
         device_list = []
         for device, devdata in self.MLED.devices.items():
-            device_list.append(f"Device {device} ({devdata.width}x{devdata.height})")
+            device_list.append(f"Device {device} ({devdata.label}) ({devdata.width}x{devdata.height})")
 
         dpg.configure_item("devicelistcombo", items=device_list, default_value=device_list[0] if device_list else "")
 
         dpg.configure_item("addactionwindow", show=True)
-
 
     def update_mled_keyframe(self):
         if not self.last_mled_change:
             return
 
         cpos = self.timeline.current_position
-
         intensity = dpg.get_value("intensity_slider")
 
         for device_id, changed_pixels in self.last_mled_change.items():
@@ -306,7 +304,7 @@ class App:
                 )
                 track = tracks[device_id_str]
                 stmt = track.statements[-1]
-                clear_first = True  # First statement in track
+                clear_first = False  # Changed: Don't auto-clear unless explicitly needed
 
             else:
                 track = tracks[device_id_str]
@@ -318,8 +316,16 @@ class App:
                         stmt = s
                         break
 
-                # If no active statement, create new
+                # If no active statement, look for PREVIOUS state to inherit
                 if stmt is None:
+                    # Find the most recent statement before current position
+                    prev_stmt = None
+                    for s in sorted(track.statements, key=lambda x: x.end_pos, reverse=True):
+                        if s.end_pos <= cpos:
+                            prev_stmt = s
+                            break
+
+                    # Create new statement
                     self.timeline.new_statement(
                         "mled",
                         device_id_str,
@@ -328,28 +334,44 @@ class App:
                         {}
                     )
                     stmt = track.statements[-1]
-                    clear_first = True
+
+                    # Inherit previous state if exists
+                    if prev_stmt and isinstance(prev_stmt.data, dict) and "pixels" in prev_stmt.data:
+                        stmt.data = {
+                            "clear_first": False,
+                            "pixels": prev_stmt.data["pixels"].copy(),
+                            "intensity": prev_stmt.data.get("intensity", intensity)
+                        }
+                        clear_first = False
+                    else:
+                        clear_first = False
                 else:
                     clear_first = False
 
             # Build pixel map from existing data
             existing = {}
             if isinstance(stmt.data, dict) and "pixels" in stmt.data:
-                existing = {(d["x"], d["y"]): d for d in stmt.data["pixels"]}
+                existing = {(d["x"], d["y"]): d.copy() for d in stmt.data["pixels"]}
             elif isinstance(stmt.data, list):
-                existing = {(d["x"], d["y"]): d for d in stmt.data}
+                existing = {(d["x"], d["y"]): d.copy() for d in stmt.data}
 
             # Update with new changed pixels
             for x, col in changed_pixels.items():
                 for y, st in col.items():
-                    existing[(x, y)] = {"x": x, "y": y, "state": st}
+                    if st == 0:  # If turning off, remove from existing
+                        existing.pop((x, y), None)
+                    else:
+                        existing[(x, y)] = {"x": x, "y": y, "state": st}
 
             # Store FINAL JSON PACKET directly in the timeline
             stmt.data = {
                 "clear_first": clear_first,
                 "pixels": list(existing.values()),
-                "intensity": intensity  # default intensity
+                "intensity": intensity
             }
+
+        # Clear the change buffer
+        self.last_mled_change.clear()
 
         # Go to next frame
         self.timeline.set_position(cpos + 1)
@@ -423,7 +445,18 @@ class App:
             self.last_mled_change = {}  # Clear old changes
 
             if "mled" in data:
+                #self.wtimeline.set_color_for_item(object_id, track_name, clip_id, reset=True)
+
+
                 for device in data["mled"].keys():
+                    stmt = self.timeline.get_object("mled").tracks[device].statements
+
+                    for s in stmt:
+                        if s.contains_position(self.timeline.current_position):
+                            self.wtimeline.set_color_for_item("mled", device, s.id, color=[0, 255, 0, 255])
+                        else:
+                            self.wtimeline.set_color_for_item("mled", device, s.id, reset=True)
+
                     entry = data["mled"][device]
                     device_id = int(device)
                     pixels = entry.get("pixels", [])
@@ -451,7 +484,7 @@ class App:
                         if x not in self.last_mled_change[device_id]:
                             self.last_mled_change[device_id][x] = {}
                         self.last_mled_change[device_id][x][y] = st
-
+            self.MLED._safe_render()
         except Exception as e:
             self.stop_playback(None, None)
             print(traceback.format_exc())

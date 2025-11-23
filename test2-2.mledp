@@ -1,6 +1,6 @@
 {
     "name": "Test",
-    "length": 37,
+    "length": 92,
     "fps": 12,
     "LEDLayouts": [
         [
@@ -56,9 +56,9 @@
     ],
     "timeline": {
         "version": "1.0",
-        "total_frames": 37,
+        "total_frames": 92,
         "frame_rate": 12,
-        "current_position": 30,
+        "current_position": 52,
         "objects": {
             "mled": {
                 "id": "mled",
@@ -4512,6 +4512,334 @@
                                         {
                                             "x": 7,
                                             "y": 1,
+                                            "state": true
+                                        }
+                                    ],
+                                    "intensity": 15
+                                },
+                                "active": true
+                            }
+                        ]
+                    },
+                    "1": {
+                        "keyframes": [],
+                        "statements": [
+                            {
+                                "id": "mled_1_stmt_0",
+                                "start_pos": 48,
+                                "end_pos": 49,
+                                "data": {
+                                    "clear_first": false,
+                                    "pixels": [
+                                        {
+                                            "x": 2,
+                                            "y": 4,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 3,
+                                            "state": true
+                                        }
+                                    ],
+                                    "intensity": 15
+                                },
+                                "active": true
+                            },
+                            {
+                                "id": "mled_1_stmt_1",
+                                "start_pos": 49,
+                                "end_pos": 50,
+                                "data": {
+                                    "clear_first": false,
+                                    "pixels": [
+                                        {
+                                            "x": 2,
+                                            "y": 4,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 6,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 5,
+                                            "state": true
+                                        }
+                                    ],
+                                    "intensity": 15
+                                },
+                                "active": true
+                            },
+                            {
+                                "id": "mled_1_stmt_2",
+                                "start_pos": 50,
+                                "end_pos": 51,
+                                "data": {
+                                    "clear_first": false,
+                                    "pixels": [
+                                        {
+                                            "x": 2,
+                                            "y": 4,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 6,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 5,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 2,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 1,
+                                            "y": 2,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 1,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 0,
+                                            "y": 3,
+                                            "state": true
+                                        }
+                                    ],
+                                    "intensity": 15
+                                },
+                                "active": true
+                            },
+                            {
+                                "id": "mled_1_stmt_3",
+                                "start_pos": 51,
+                                "end_pos": 52,
+                                "data": {
+                                    "clear_first": false,
+                                    "pixels": [
+                                        {
+                                            "x": 2,
+                                            "y": 4,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 6,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 6,
+                                            "y": 5,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 1,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 2,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 1,
+                                            "y": 2,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 1,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 0,
+                                            "y": 3,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 1,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 2,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 7,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 3,
+                                            "y": 6,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 6,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 4,
+                                            "y": 5,
+                                            "state": true
+                                        },
+                                        {
+                                            "x": 5,
+                                            "y": 5,
                                             "state": true
                                         }
                                     ],
