@@ -1,0 +1,12 @@
+{
+    "livepreview": {
+        "enabled": true,
+        "port": "COM14",
+        "speed": 115200,
+        "device": {
+            "invertH": false,
+            "invertV": true,
+            "rotate": "No Rotate"
+        }
+    }
+}
