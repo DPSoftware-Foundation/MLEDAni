@@ -39,3 +39,27 @@ Certified MCU for Live Preview
 
 Live preview maybe not work well with Serial because limit of bauds rates.
 
+# Exported Header
+
+## DPH_MAX7219
+For use the animation that exported in format .h arduino. 
+You can follow this code if you use included player.
+```cpp
+#include "DPH_MAX7219_Matrix.h"
+#include "animation.h"
+
+MAX7219_LED_MATRIX display(0, 2, 1, 3);
+AnimationPlayer player;
+
+void setup() {
+  display.begin();
+  display.setIntensity(14);
+  display.clear();
+  player.begin();
+}
+
+void loop() {
+  bool completed = player.update(display);
+}
+```
+But for non-included player. you can follow this [example](https://github.com/damp11113/DPH_MAX7219/blob/master/examples/DPH_MAX7219/MaxledaStudio_LivePrview.ino).
