@@ -62,4 +62,4 @@ void loop() {
   bool completed = player.update(display);
 }
 ```
-But for non-included player. you can follow this [example](https://github.com/damp11113/DPH_MAX7219/blob/master/examples/DPH_MAX7219/MaxledaStudio_LivePrview.ino).
+But for non-included player. you can follow this [example](https://github.com/damp11113/DPH_MAX7219/blob/master/examples/DPH_MAX7219/Maxleda.ino).
